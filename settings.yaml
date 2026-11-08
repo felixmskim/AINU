@@ -1,0 +1,74 @@
+# 프로젝트 전체 설정. 코드 안에 숫자나 모델 이름을 하드코딩하지 말고 여기에 둔다.
+# 섹션별로 자기 부분만 수정한다 (충돌 방지).
+
+# 기본 모드 (CLI, 데모 화면, 평가 러너의 기본값)
+mode: full
+
+# 4단계 비교 실험: 같은 코드에서 스위치만 바꿔 네 조건을 만든다.
+#   input_guard / retrieval_guard / output_guard : 해당 가드를 실행할지
+#   llm_judges    : 가드 안에서 LLM 판정을 쓸지 (false = 규칙/코드 검사만)
+#   policy_prompt : baseline 생성기에 "자료에 있는 것만 답해라" 지시를 붙일지
+#   tutor         : 튜터(수준 분석, 전략, 이해도 확인)를 쓸지. false면 단순 RAG 생성기 사용
+#                   (순수한 가드 효과만 비교하고 싶으면 code_guard 의 tutor 를 false 로 바꾼다)
+modes:
+  baseline:
+    input_guard: false
+    retrieval_guard: false
+    output_guard: false
+    llm_judges: false
+    policy_prompt: false
+    tutor: false
+  prompt_only:
+    input_guard: false
+    retrieval_guard: false
+    output_guard: false
+    llm_judges: false
+    policy_prompt: true
+    tutor: false
+  code_guard:
+    input_guard: true
+    retrieval_guard: true
+    output_guard: true
+    llm_judges: false
+    policy_prompt: false
+    tutor: true
+  full:
+    input_guard: true
+    retrieval_guard: true
+    output_guard: true
+    llm_judges: true
+    policy_prompt: false
+    tutor: true
+
+# [P1] 검색
+retrieval:
+  k: 5
+
+# [P1][P2] 가드 임계값 (v0 구현 때 사용. 스텁은 아직 사용하지 않음)
+guards:
+  retrieval:
+    min_score: 0.3          # 이 점수보다 낮은 검색 결과만 있으면 근거 부족(no_evidence)
+
+# [P3] 파이프라인과 튜터
+pipeline:
+  max_regenerations: 1      # 출력 가드 실패 시 다시 생성하는 최대 횟수
+tutor:
+  level_confidence_threshold: 0.7   # 이보다 확신이 낮으면 학습자 수준을 바꾸지 않는다
+
+# [P3] AI 호출 (엘리스 ML API)
+llm:
+  provider: fake            # fake = 키 없이 가짜 응답 / http = 실제 호출 (.env 필요)
+  base_url_env: ELICE_ML_API_BASE_URL
+  api_key_env: ELICE_ML_API_KEY
+  models:
+    generate: TODO-큰-모델-이름     # 답변 생성용 (ML API 모델 목록 확인 후 기입)
+    judge: TODO-작은-모델-이름      # 분류/판정용
+  timeout_s: 60
+  cache: true               # http 일 때 같은 요청의 응답을 저장해 크레딧 절약
+  cache_path: .cache/llm_cache.json
+
+# 경로
+paths:
+  chunks_fixture: fixtures/chunks.sample.json   # 스텁 검색기가 쓰는 샘플. 실제 인덱스가 생기면 불필요
+  raw_dir: data/raw
+  index_dir: data/index

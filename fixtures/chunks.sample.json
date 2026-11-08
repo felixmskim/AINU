@@ -1,0 +1,32 @@
+[
+  {
+    "chunk_id": "sample_doc_p01_c1",
+    "doc": "샘플 교재 (실제 교육자료로 교체할 것)",
+    "section": "1장. 청킹",
+    "page": 1,
+    "text": "청킹은 긴 문서를 검색하기 좋은 크기의 조각으로 나누는 작업이다. 조각이 너무 크면 관련 없는 내용이 섞이고, 너무 작으면 문맥이 끊긴다.",
+    "score": 0.82,
+    "difficulty": "beginner",
+    "prerequisites": []
+  },
+  {
+    "chunk_id": "sample_doc_p01_c2",
+    "doc": "샘플 교재 (실제 교육자료로 교체할 것)",
+    "section": "1장. 청킹",
+    "page": 1,
+    "text": "오버랩은 인접한 두 조각이 일부 내용을 서로 겹치도록 나누는 설정이다. 조각의 경계에서 문장이 잘려 필요한 문맥이 사라지는 문제를 줄여 준다.",
+    "score": 0.79,
+    "difficulty": "intermediate",
+    "prerequisites": ["청킹"]
+  },
+  {
+    "chunk_id": "sample_doc_p02_c1",
+    "doc": "샘플 교재 (실제 교육자료로 교체할 것)",
+    "section": "2장. 임베딩",
+    "page": 2,
+    "text": "임베딩은 텍스트의 의미를 숫자 벡터로 바꾸는 방법이다. 의미가 비슷한 텍스트는 비슷한 벡터가 된다.",
+    "score": 0.41,
+    "difficulty": "beginner",
+    "prerequisites": []
+  }
+]

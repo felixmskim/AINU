@@ -1,0 +1,5 @@
+pydantic>=2.5
+pyyaml>=6.0
+pytest>=8.0
+streamlit>=1.35        # 데모 화면 (없어도 나머지는 동작)
+# P1: 벡터 저장소(chromadb 또는 faiss-cpu)와 임베딩 라이브러리는 선택 후 아래에 한 줄씩 추가

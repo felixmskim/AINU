@@ -1,0 +1,34 @@
+[
+  {
+    "case_id": "good_01",
+    "note": "근거와 일치하는 정상 답변. 출력 가드는 통과(pass)시켜야 한다.",
+    "chunk_ids": ["sample_doc_p01_c1", "sample_doc_p01_c2"],
+    "expect_action": "pass",
+    "draft": {
+      "grounded_explanation": "오버랩은 인접한 조각이 일부 내용을 겹치게 하는 설정이다. 조각 경계에서 문맥이 끊기는 문제를 줄여 준다.",
+      "claims": [
+        {"text": "오버랩은 인접한 조각이 일부 내용을 겹치게 하는 설정이다.", "citations": ["sample_doc_p01_c2"]},
+        {"text": "조각 경계에서 문맥이 끊기는 문제를 줄여 준다.", "citations": ["sample_doc_p01_c2"]}
+      ],
+      "analogy": "(비유) 책을 나눌 때 문장이 잘리지 않도록 앞뒤 한 줄씩 겹쳐서 나누는 것과 비슷하다.",
+      "citations": ["sample_doc_p01_c2"],
+      "check_question": "조각이 문장 중간에서 잘리면 어떤 문제가 생길까요?"
+    }
+  },
+  {
+    "case_id": "hallucinated_01",
+    "note": "교재에 없는 수치를 지어낸 답변. 출력 가드는 regenerate 해야 한다.",
+    "chunk_ids": ["sample_doc_p01_c2"],
+    "expect_action": "regenerate",
+    "draft": {
+      "grounded_explanation": "오버랩은 항상 조각 크기의 50%로 설정해야 하며, 그렇지 않으면 검색 정확도가 30% 떨어진다.",
+      "claims": [
+        {"text": "오버랩은 항상 조각 크기의 50%로 설정해야 한다.", "citations": ["sample_doc_p01_c2"]},
+        {"text": "그렇지 않으면 검색 정확도가 30% 떨어진다.", "citations": ["sample_doc_p01_c2"]}
+      ],
+      "analogy": null,
+      "citations": ["sample_doc_p01_c2"],
+      "check_question": null
+    }
+  }
+]
